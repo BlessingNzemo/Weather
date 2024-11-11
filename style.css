@@ -1,0 +1,324 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f0f2f5;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.search-box {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.search-box input {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    flex: 1;
+    font-size: 1rem;
+}
+
+.search-box button {
+    padding: 0.5rem 1rem;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.weather-info {
+    text-align: center;
+}
+
+.temp h1 {
+    font-size: 3rem;
+    margin: 1rem 0;
+}
+
+.weather-condition {
+    margin: 1rem 0;
+}
+
+.weather-condition img {
+    width: 100px;
+}
+
+.details {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #ddd;
+}
+
+/* Animations existantes */
+.clouds {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.cloud {
+    position: absolute;
+    width: 200px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50px;
+    animation: float 25s infinite linear;
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.1));
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    transform-origin: center center;
+    z-index: 2;
+}
+
+.cloud:before, .cloud:after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.1));
+}
+
+.cloud:before {
+    width: 100px;
+    height: 100px;
+    top: -40px;
+    left: 20px;
+}
+
+.cloud:after {
+    width: 60px;
+    height: 60px;
+    top: -20px;
+    left: 100px;
+}
+
+.cloud1 { 
+    top: 15%; 
+    left: -200px;
+    animation: 
+        moveCloud1 20s infinite linear,
+        bobUpDown 3s infinite ease-in-out;
+    opacity: 0.9;
+    transform: scale(1.2);
+}
+
+.cloud2 { 
+    top: 45%; 
+    left: -200px;
+    animation: 
+        moveCloud2 30s infinite linear,
+        bobUpDown 4s infinite ease-in-out;
+    opacity: 0.7;
+    transform: scale(1.4);
+}
+
+.cloud3 { 
+    top: 75%; 
+    left: -200px;
+    animation: 
+        moveCloud3 25s infinite linear,
+        bobUpDown 5s infinite ease-in-out;
+    opacity: 0.8;
+    transform: scale(0.9);
+}
+
+@keyframes float {
+    from {
+        transform: translateX(-200px);
+    }
+    to {
+        transform: translateX(calc(100vw + 200px));
+    }
+}
+
+@keyframes bobUpDown {
+    0%, 100% {
+        margin-top: 0;
+    }
+    50% {
+        margin-top: 15px;
+    }
+}
+
+.sun {
+    position: absolute;
+    top: 50px;
+    right: 100px;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(to bottom right, #FFD700, #FFA500);
+    border-radius: 50%;
+    box-shadow: 
+        0 0 50px #FFD700,
+        0 0 100px rgba(255, 215, 0, 0.5),
+        0 0 150px rgba(255, 215, 0, 0.3);
+    animation: glow 4s infinite alternate, spin 60s linear infinite;
+    z-index: 1;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 50px #FFD700;
+    }
+    to {
+        box-shadow: 0 0 100px #FFD700;
+    }
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+    .container {
+        margin: 1rem;
+        padding: 1rem;
+    }
+    
+    .temp h1 {
+        font-size: 2.5rem;
+    }
+}
+
+/* Ajoutez ces styles à la fin de votre fichier CSS */
+.shake {
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+@keyframes shake {
+    10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+    
+    20%, 80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%, 50%, 70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    40%, 60% {
+        transform: translate3d(4px, 0, 0);
+    }
+}
+
+.input-error {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 1px #ef4444 !important;
+}
+
+.error-message {
+    color: #ef4444;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.error-message.visible {
+    opacity: 1;
+}
+
+/* Nouvelles animations personnalisées pour chaque nuage */
+@keyframes moveCloud1 {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(calc(100vw + 400px));
+    }
+}
+
+@keyframes moveCloud2 {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(calc(100vw + 400px));
+    }
+}
+
+@keyframes moveCloud3 {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(calc(100vw + 400px));
+    }
+}
+
+/* Ajout d'une animation de réapparition en douceur */
+@keyframes fadeInOut {
+    0%, 100% {
+        opacity: 0;
+    }
+    10%, 90% {
+        opacity: 1;
+    }
+}
+
+/* Ajoutez ces styles pour le loader */
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #FFF;
+    border-bottom-color: #3b82f6;
+    border-radius: 50%;
+    display: none;
+    margin: 0 auto;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading .loader {
+    display: inline-block;
+}
+
+.loading #weather-data,
+.loading #initial-state {
+    display: none;
+}
